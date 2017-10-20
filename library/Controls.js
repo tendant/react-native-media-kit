@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+
+import PropTypes from 'prop-types';
 
 import ReactNative, {
   StyleSheet,
@@ -14,7 +16,7 @@ import ReactNative, {
   ActivityIndicator,
 } from 'react-native';
 
-import Slider from '@ldn0x7dc/react-native-slider';
+import Slider from 'react-native-slider';
 
 /**
  * format as --:-- or --:--:--
