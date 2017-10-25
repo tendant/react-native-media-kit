@@ -34,14 +34,14 @@
 }
 
 - (void)willMoveToWindow:(UIWindow *)newWindow {
-  NSLog(@"willMoveToWindow...%@", newWindow);
+//  NSLog(@"willMoveToWindow...%@", newWindow);
   if(!newWindow) {
     [self releasePlayer];
   }
 }
 
 - (void)willMoveToSuperview:(UIView *)newSuperview {
-  NSLog(@"willMoveToSuperview...%@", newSuperview);
+//  NSLog(@"willMoveToSuperview...%@", newSuperview);
   if(!newSuperview) {
     [self releasePlayer];
   }
@@ -75,7 +75,7 @@
 }
 
 - (void) setAutoplay:(BOOL)autoplay {
-  NSLog(@"setAutoplay...autoplay=%d", autoplay);
+//  NSLog(@"setAutoplay...autoplay=%d", autoplay);
   _autoplay = autoplay;
   [self updateProps];
 }
@@ -91,25 +91,25 @@
 }
 
 - (void) setPreload:(NSString *)preload {
-  NSLog(@"setPreload...preload=%@", preload);
+//  NSLog(@"setPreload...preload=%@", preload);
   _preload = preload;
   [self updateProps];
 }
 
 - (void) setLoop:(BOOL)loop {
-  NSLog(@"setLoop...loop=%d", loop);
+//  NSLog(@"setLoop...loop=%d", loop);
   _loop = loop;
   [self updateProps];
 }
 
 - (void) setMuted:(BOOL)muted {
-  NSLog(@"setMuted...muted=%d", muted);
+//  NSLog(@"setMuted...muted=%d", muted);
   _muted = muted;
   [self updateProps];
 }
 
 - (void) layoutSubviews {
-  NSLog(@"layoutSubviews...");
+//  NSLog(@"layoutSubviews...");
   [super layoutSubviews];
   firstLayout = true;
   [self updateProps];
@@ -306,7 +306,7 @@
     }
     [self notifyPlayerBufferChange:array];
   } else if( [keyPath isEqualToString:@"rate"]) {
-    NSLog(@"rate=%f", player.rate);
+//    NSLog(@"rate=%f", player.rate);
     if(player.rate == 0) {
       [self notifyPlayerPaused];
     } else {
@@ -328,7 +328,7 @@
 
 
 - (void)pause {
-  NSLog(@"pause...");
+//  NSLog(@"pause...");
   if (player) {
     [player pause];
     shouldResumePlay = false;
@@ -336,7 +336,7 @@
 }
 
 - (void)play {
-  NSLog(@"play...");
+//  NSLog(@"play...");
   [self initPlayerIfNeeded];
   if(player) {
     [player play];
@@ -345,7 +345,7 @@
 }
 
 - (void)stop {
-  NSLog(@"stop...");
+//  NSLog(@"stop...");
   if (player) {
     [player pause];
     [player seekToTime:kCMTimeZero];
@@ -354,7 +354,7 @@
 }
 
 - (void)seekTo: (NSTimeInterval) timeMs {
-  NSLog(@"seekTo...timeMs=%f", timeMs);
+//  NSLog(@"seekTo...timeMs=%f", timeMs);
   if(player) {
     CMTime cmTime = CMTimeMakeWithSeconds(timeMs/1000, 1);
     [player seekToTime:cmTime];
