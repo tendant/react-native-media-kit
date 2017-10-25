@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/ldn0x7dc/react-native-media-kit#readme",
   "dependencies": {
-    "react-native-slider": "file:../react-native-slider"
+    "@ldn0x7dc/react-native-slider": "0.0.3"
   }
 }
