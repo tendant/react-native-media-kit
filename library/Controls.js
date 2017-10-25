@@ -7,6 +7,7 @@ import ReactNative, {
   Text,
   View,
   TouchableOpacity,
+  TouchableWithoutFeedback,
   NativeModules,
   requireNativeComponent,
   Dimensions,
@@ -16,7 +17,7 @@ import ReactNative, {
   ActivityIndicator,
 } from 'react-native';
 
-import Slider from 'react-native-slider';
+import Slider from '@ldn0x7dc/react-native-slider';
 
 /**
  * format as --:-- or --:--:--
@@ -121,6 +122,7 @@ export default class Controls extends React.Component {
       <View
         style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0, flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
         {bufferIndicator}
+        <TouchableWithoutFeedback >
         <View
           style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: 40, backgroundColor: '#00000033', flexDirection: 'row'}}>
 
@@ -133,7 +135,7 @@ export default class Controls extends React.Component {
           </TouchableOpacity>
 
           <Text
-            style={{alignSelf: 'center', fontSize: 12, color: 'white', width: currentFormated.length == 5 ? 35:56, textAlign: 'right'}}>
+            style={{alignSelf: 'center', fontSize: 10, color: 'white', width: currentFormated.length == 5 ? 35:56, textAlign: 'right'}}>
             {currentFormated}
           </Text>
 
@@ -141,7 +143,7 @@ export default class Controls extends React.Component {
             style={{flex: 1, marginHorizontal: 5, height: 40}}
             trackContainerStyle={{height: 2, backgroundColor: 'gray'}}
             thumbImage={require('./img/media-player-thumb.png')}
-            thumbStyle={{width: 10, height: 10}}
+            thumbStyle={{width: 15, height: 15}}
 
             onSlidingComplete={(value) => {
               this.setState({
@@ -159,16 +161,16 @@ export default class Controls extends React.Component {
             maximumValue={this.props.total}
             minimumValue={0}
             value={this.state.current}
-            disabled={this.props.total > 0}
+            disabled={this.props.total <= 0}
             tracks={tracks}
           />
 
           <Text
-            style={{alignSelf: 'center', fontSize: 12, color: 'white', width: totalFormated.length == 5 ? 35:56, marginRight: 10}}>
+            style={{alignSelf: 'center', fontSize: 10, color: 'white', width: totalFormated.length == 5 ? 35:56, marginRight: 10}}>
             {totalFormated}
           </Text>
         </View>
-
+        </TouchableWithoutFeedback>
       </View>
     );
   }

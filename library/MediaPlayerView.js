@@ -7,7 +7,8 @@ import ReactNative, {
   View,
   NativeModules,
   requireNativeComponent,
-  Image
+  Image,
+  Text
 } from 'react-native';
 
 import Controls from './Controls';
@@ -39,7 +40,8 @@ export default class MediaPlayerView extends React.Component {
   static propTypes = {
     ...RCTMediaPlayerView.propTypes,
     controls: PropTypes.bool,
-    poster: PropTypes.string
+    poster: PropTypes.string,
+    progress: PropTypes.string,
   }
 
   static defaultProps = {
@@ -47,6 +49,7 @@ export default class MediaPlayerView extends React.Component {
     controls: true,
     preload: 'none',
     loop: false,
+    progress: " "
   }
 
   constructor(props) {
@@ -72,18 +75,38 @@ export default class MediaPlayerView extends React.Component {
   render() {
     let posterView;
     if(this.props.poster && this.state.width && this.state.height && this.state.showPoster) {
-      posterView = (
-        <Image
-          style={{
-          position: 'absolute',
-          left: 0, right: 0, top: 0, bottom: 0,
-          backgroundColor: 'transparent',
-          width: this.state.width,
-          height: this.state.height,
-          resizeMode: 'contain'
-          }}
-          source={{uri: this.props.poster}}/>
-      );
+      if(this.props.progress === " ") {
+        posterView = (
+          <Image
+            style={{
+            position: 'absolute',
+            left: 0, right: 0, top: 0, bottom: 0,
+            backgroundColor: 'transparent',
+            width: this.state.width,
+            height: this.state.height,
+            resizeMode: 'contain'
+            }}
+            source={{uri: this.props.poster}}/>
+        );
+      } else {
+        posterView = (
+          <Image
+            style={{
+            position: 'absolute',
+            left: 0, right: 0, top: 0, bottom: 0,
+            backgroundColor: 'transparent',
+            width: this.state.width,
+            height: this.state.height,
+            resizeMode: 'contain',
+            alignItems: 'center',
+            justifyContent: 'center'
+            }}
+            source={{uri: this.props.poster}} >
+            <Text style={{color: 'white', fontSize: 15, fontFamily: 'OpenSans-Light'}} >{this.props.progress}</Text>
+          </Image>
+        );
+
+      }
     }
 
     let controlsView;
@@ -102,8 +125,7 @@ export default class MediaPlayerView extends React.Component {
               this.play();
             }
           }}
-          bufferRanges={this.state.bufferRanges}
-        />
+          bufferRanges={this.state.bufferRanges}/>
       );
     }
 
@@ -122,8 +144,7 @@ export default class MediaPlayerView extends React.Component {
           onPlayerBuffering={this._onPlayerBuffering.bind(this)}
           onPlayerBufferOK={this._onPlayerBufferOK.bind(this)}
           onPlayerFinished={this._onPlayerFinished.bind(this)}
-          onPlayerBufferChange={this._onPlayerBufferChange.bind(this)}
-        />
+          onPlayerBufferChange={this._onPlayerBufferChange.bind(this)}/>
 
         {posterView}
         {controlsView}
